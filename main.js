@@ -8,8 +8,17 @@ canvas.style = "border: solid 5pt green"
 ctx.fillStyle = "green";
 ctx.strokeStyle = "green";
 ctx.lineWidth = "5.0";
-ctx.beginPath();
-ctx.arc(100, 100, 80, 0, 2 * Math.PI);
-ctx.stroke();
-ctx.fill();
 
+function init() {
+    window.requestAnimationFrame(draw)
+}
+
+function draw() {
+    canvas.clearRect(0, 0, canvas.width, canvas.height);
+    ctx.beginPath(100, 100);
+    ctx.arc(100, 100, 80, 0, 2 * Math.PI);
+    ctx.stroke();
+    ctx.fill();
+}
+
+init();
