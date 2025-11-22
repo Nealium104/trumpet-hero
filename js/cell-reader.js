@@ -1,4 +1,4 @@
-import noteTable from "./notes.json" with { type: "json" };
+import noteTable from "./data/notes.json" with { type: "json" };
 
 const cell = ['C4', 'D4', 'E4', 'G4'];
 
@@ -9,5 +9,3 @@ function getCellFingering(notes) {
     }
     return collect
 }
-
-console.log(getCellFingering(cell));
