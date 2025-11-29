@@ -16,3 +16,10 @@ Below is just some scratch for me to use. If you can see it, you're either very 
 - [ ] I need to do a canvas tutorial
 - [ ] I need to create some logic for converting notes into fingerings (do I really, or is this just trumpet brain?)
 - [ ] I need to figure out how I'm going to store the data for a song/exercise
+
+## 2025-11-27
+There will be a few parts. First, we need game logic separate from the canvas logic. We want to basically determine state from the logic at the beginning of every frame.
+
+We will want to grow/change color of the circles when they're touched. That impllies that we'll want to move the color and size logic out of the regular initial config and have it in the actual circles themselves.
+
+To change colors, I could have a "grow" function that loops through on every frame, limiting when the size gets too high.
