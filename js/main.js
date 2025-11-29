@@ -36,7 +36,7 @@ canvas.addEventListener("touchstart", (e) => {
 
 canvas.addEventListener("touchend", (e) => {
     e.preventDefault();
-    Array.from(e.targetTouches).forEach(touch => {
+    Array.from(e.changedTouches).forEach(touch => {
         for (const valve of valves) {
             if (touch.identifier === valve.pressId) {
                 valve.unpress();
