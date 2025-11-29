@@ -4,30 +4,55 @@ import { Circle } from "./circle.js";
 let canvas = document.getElementById("canvas");
 const ctx = canvas.getContext("2d");
 
-canvas.width = document.documentElement.clientWidth;
-canvas.height = document.documentElement.clientHeight;
+canvas.width = window.innerWidth;
+canvas.height = window.innerHeight;
+
 canvas.style.border = "solid 5pt green"
+ctx.lineWidth = 5;
 
-ctx.fillStyle = "green";
-ctx.strokeStyle = "green";
-ctx.lineWidth = "5.0";
+let v1 = new Circle(ctx, 200, 200, 100);
+let v2 = new Circle(ctx, 200, 500, 100);
+let v3 = new Circle(ctx, 200, 800, 100);
+let valves = [v1, v2, v3];
 
-let v1 = new Circle(ctx, 100, 100, 50);
-let v2 = new Circle(ctx, 100, 200, 50);
-let v3 = new Circle(ctx, 100, 300, 50);
+canvas.addEventListener("touchstart", (e) => {
+    e.preventDefault();
+    Array.from(e.targetTouches).forEach(touch => {
+        for (const valve of valves) {
+            console.log(touch);
+            console.log(valve);
 
-function init() {
-    window.requestAnimationFrame(draw);
-}
+            let leftX = valve.x - valve.radius;
+            let rightX = valve.x + valve.radius;
+            let topY = valve.y + valve.radius;
+            let bottomY = valve.y - valve.radius;
+
+            if (touch.clientX > leftX && touch.clientX < rightX && touch.clientY > bottomY && touch.clientY < topY) {
+                console.log("I should be growing");
+                valve.grow();
+            }
+        }
+    });
+});
+
+
+canvas.addEventListener("touchend", (e) => {
+    e.preventDefault();
+    Array.from(e.targetTouches).forEach(touch => {
+        for (const valve of valves) {
+            valve.shrink();
+        }
+    });
+})
 
 function draw() {
     ctx.clearRect(0, 0, canvas.width, canvas.height);
-    // ctx.drawRect(100, 100);
-    // ctx.stroke();
-    v1.draw();
-    v2.draw();
-    v3.draw();
+
+    for (const valve of valves) {
+        valve.draw();
+    }
+
     window.requestAnimationFrame(draw)
 }
 
-init();
+draw();
