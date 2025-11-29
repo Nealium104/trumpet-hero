@@ -5,7 +5,20 @@ export class Circle {
         this.y = y;
         this.radius = radius;
         this.color = color;
+        this.isPressed = false;
+        this.pressId = "";
     }
+
+    press(id) {
+        this.pressId = id;
+        this.isPressed = true;
+    }
+
+    unpress() {
+        this.pressId = "";
+        this.isPressed = false;
+    }
+
 
     draw() {
         this.ctx.beginPath();

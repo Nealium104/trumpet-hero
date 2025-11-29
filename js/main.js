@@ -28,8 +28,7 @@ canvas.addEventListener("touchstart", (e) => {
             let bottomY = valve.y - valve.radius;
 
             if (touch.clientX > leftX && touch.clientX < rightX && touch.clientY > bottomY && touch.clientY < topY) {
-                console.log("I should be growing");
-                valve.grow();
+                valve.press(touch.identifier);
             }
         }
     });
@@ -40,7 +39,9 @@ canvas.addEventListener("touchend", (e) => {
     e.preventDefault();
     Array.from(e.targetTouches).forEach(touch => {
         for (const valve of valves) {
-            valve.shrink();
+            if (touch.identifier === valve.pressId) {
+                valve.unpress();
+            }
         }
     });
 })
@@ -48,7 +49,13 @@ canvas.addEventListener("touchend", (e) => {
 function draw() {
     ctx.clearRect(0, 0, canvas.width, canvas.height);
 
+    // interactive for the valves
     for (const valve of valves) {
+        if (valve.isPressed && valve.radius < 200) {
+            valve.grow();
+        } else if (!valve.isPressed && valve.radius > 100) {
+            valve.shrink();
+        }
         valve.draw();
     }
 
