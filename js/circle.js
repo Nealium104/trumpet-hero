@@ -30,18 +30,16 @@ export class Circle {
     }
 
     grow() {
-        console.log("circle growing function");
         this.color = "blue";
-        if (this.radius < 400) {
-            this.radius += 1;
+        if (this.radius < 300) {
+            this.radius += 10;
         }
     }
 
     shrink() {
-        console.log("circle shrinking function");
         this.color = "green";
         if (this.radius > 100) {
-            this.radius -= 1;
+            this.radius -= 10;
         }
     }
 }

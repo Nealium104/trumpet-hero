@@ -10,18 +10,17 @@ canvas.height = window.innerHeight;
 canvas.style.border = "solid 5pt green"
 ctx.lineWidth = 5;
 
-let v1 = new Circle(ctx, 200, 200, 100);
-let v2 = new Circle(ctx, 200, 500, 100);
-let v3 = new Circle(ctx, 200, 800, 100);
+let xLocation = canvas.width - 150;
+
+let v1 = new Circle(ctx, xLocation, 1000, 100, "green");
+let v2 = new Circle(ctx, xLocation, 700, 100, "purple");
+let v3 = new Circle(ctx, xLocation, 400, 100, "red");
 let valves = [v1, v2, v3];
 
 canvas.addEventListener("touchstart", (e) => {
     e.preventDefault();
     Array.from(e.targetTouches).forEach(touch => {
         for (const valve of valves) {
-            console.log(touch);
-            console.log(valve);
-
             let leftX = valve.x - valve.radius;
             let rightX = valve.x + valve.radius;
             let topY = valve.y + valve.radius;
