@@ -31,15 +31,15 @@ export class Circle {
 
     grow() {
         this.color = "blue";
-        if (this.radius < 300) {
-            this.radius += 20;
+        if (this.radius < 150) {
+            this.radius += 25;
         }
     }
 
     shrink() {
         this.color = "green";
         if (this.radius > 100) {
-            this.radius -= 20;
+            this.radius -= 25;
         }
     }
 }
