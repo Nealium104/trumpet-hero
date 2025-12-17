@@ -1,5 +1,5 @@
-// import cellReader from "./cell-reader.js";
 import { Circle } from "./circle.js";
+import { Trumpet } from "./trumpet.js";
 
 let canvas = document.getElementById("canvas");
 const ctx = canvas.getContext("2d");
@@ -12,20 +12,21 @@ ctx.lineWidth = 5;
 
 let xLocation = canvas.width - 150;
 
-let v1 = new Circle(ctx, xLocation, 1000, 100, "green");
+let v1 = new Circle(ctx, xLocation, 1000, 100);
 let v2 = new Circle(ctx, xLocation, 700, 100, "purple");
 let v3 = new Circle(ctx, xLocation, 400, 100, "red");
 let valves = [v1, v2, v3];
 
+const trumpet = new Trumpet();
+
 async function getAllNotes() {
-    const songFile = "../data/exercises/songs1235cell.json"
+    const songFile = "../data/exercises/1235cell.json"
     const request = new Request(songFile);
     const response = await fetch(request);
 
     const notes = await response.json();
     return notes;
 }
-
 
 canvas.addEventListener("touchstart", (e) => {
     e.preventDefault();
@@ -47,13 +48,27 @@ canvas.addEventListener("touchstart", (e) => {
 canvas.addEventListener("touchend", (e) => {
     e.preventDefault();
     Array.from(e.changedTouches).forEach(touch => {
-        for (const valve of valves) {
-            if (touch.identifier === valve.pressId) {
-                valve.unpress();
-            }
-        }
-    });
+        valves.forEach((valve, i) => {
+            // translate from array index to trumpet index
+            const valveIndex = i + 1;
+        });
+        // for (const valve of valves) {
+        //     const valveIndex = 
+        //     if (touch.identifier === valve.pressId) {
+        //         valve.unpress();
+        //     }
+        // }
+    // }
 });
+
+function getDistance(x1, y1, x2, y2){
+    // pythagorean theorum
+    let a = Math.abs(x1 - x2) ** 2;
+    let b = Math.abs(y1 - y2) ** 2;
+
+    return Math.sqrt(a + b);
+}
+
 // Array of each valve's boolean isPressed
 // e.g., [true, true, false]
 // return string with the valve combo
@@ -63,28 +78,31 @@ let allNotes = getAllNotes();
 function draw() {
     ctx.clearRect(0, 0, canvas.width, canvas.height);
 
-    console.log(allNotes);
-    let expectedValveCombo = "";
-    let liveValveCombo = "";
+    let expectedValveCombo = [];
 
-    // Changes to valves
-    for (const valve of valves) {
-        if (valve.isPressed && valve.radius < 200) {
+    valves.forEach((valve, i) => {
+        // Map valve array index to trumpet index
+        // e.g. E would be represented as 0-1 in the array
+        // and would be 1-2 in the trumpet
+        const valveIndex = i + 1;
+
+        const isPressed = trumpet.valves[valveIndex];
+        if (isPressed) {
             valve.grow();
-        } else if (!valve.isPressed && valve.radius > 100) {
+        } else {
             valve.shrink();
         }
-        liveValveCombo.push(valve.isPressed);
+
         valve.draw();
-    }
+    });
 
-    if (liveValveCombo === expectedValveCombo) {
-        // move along the array, make the user see happy things
+    if (trumpet.getCurrentCombo() === expectedValveCombo) {
+        canvas.style.border = "solid 5pt red"
     } else {
-        // Don't move along the array, show the user sad things?
+
     }
 
-    window.requestAnimationFrame(draw);
+    requestAnimationFrame(draw);
 }
 
 draw();

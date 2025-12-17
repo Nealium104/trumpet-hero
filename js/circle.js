@@ -1,24 +1,11 @@
 export class Circle {
-    constructor(ctx, x, y, radius, color = 'green') {
+    constructor(ctx, x, y, color = "green") {
         this.ctx = ctx;
         this.x = x;
         this.y = y;
-        this.radius = radius;
+        this.radius = 100;
         this.color = color;
-        this.isPressed = false;
-        this.pressId = "";
     }
-
-    press(id) {
-        this.pressId = id;
-        this.isPressed = true;
-    }
-
-    unpress() {
-        this.pressId = "";
-        this.isPressed = false;
-    }
-
 
     draw() {
         this.ctx.beginPath();
