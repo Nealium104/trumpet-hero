@@ -1,4 +1,4 @@
-import noteTable from "./data/notes.json" with { type: "json" };
+import noteTable from "../data/notes.json" with { type: "json" };
 
 export default function getCellFingering(notes) {
     const collect = [];

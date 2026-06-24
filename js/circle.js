@@ -29,4 +29,10 @@ export class Circle {
             this.radius -= 25;
         }
     }
+
+    intersects(x, y) {
+        const dx = x - this.x;
+        const dy = y - this.y;
+        return (dx * dx + dy * dy) <= (this.radius * this.radius);
+    }
 }
