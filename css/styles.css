@@ -49,3 +49,6 @@ table {
 
 /* Begin styles */
 
+.note[data-status="incorrect"] {
+    fill: 'red';
+}

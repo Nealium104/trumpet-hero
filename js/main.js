@@ -48,7 +48,7 @@ canvas.addEventListener("touchend", (e) => {
             const valveIndex = i + 1;
         });
         // for (const valve of valves) {
-        //     const valveIndex = 
+        //     const valveIndex =
         //     if (touch.identifier === valve.pressId) {
         //         valve.unpress();
         //     }
@@ -65,10 +65,6 @@ function getDistance(x1, y1, x2, y2) {
     return Math.sqrt(a + b);
 }
 
-// Array of each valve's boolean isPressed
-// e.g., [true, true, false]
-// return string with the valve combo
-// This feels like an anti-pattern
 let allNotes = getAllNotes();
 
 function draw() {
