@@ -2,7 +2,11 @@
   "private": true,
   "type": "module",
   "scripts": {
+    "dev": "http-server -p -c-1",
     "test": "node --test",
     "test:watch": "node --test --watch"
+  },
+  "devDependencies": {
+    "http-server": "^14.1.1"
   }
 }
