@@ -45,7 +45,7 @@ let allNotes = await getAllNotes();
 function createStaff(origin, gap, width) {
     const treble = new Image();
 
-    treble.src = '/assets/treble.svg'
+    treble.src = '../assets/svg/treble.svg'
     treble.classList.add('staff');
     treble.dataset.status = 'default';
 
@@ -83,9 +83,9 @@ function drawNote() {
     const up = true;
 
     if (up) {
-        note.src = '/assets/quarter_up.svg';
+        note.src = '../assets/svg/quarter_up.svg';
     } else {
-        note.src = '/assets/quarter_down.svg';
+        note.src = '../assets/svg/quarter_down.svg';
     }
 
     note.classList.add('note');
