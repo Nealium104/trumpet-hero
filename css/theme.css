@@ -1,0 +1,76 @@
+/* Font */
+@font-face {
+  font-family: "Roboto";
+  src: url("../assets/fonts/Roboto-Italic-Variable.woff2") format("woff2");
+  font-style: italic;
+  font-weight: 100 900;
+  font-stretch: 75% 100%;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Roboto";
+  src: url("../assets/fonts/Roboto-Variable.woff2") format("woff2");
+  font-weight: 100 900;
+  font-stretch: 75% 100%;
+  font-display: swap;
+}
+
+/* Theme */
+[data-theme="catpuccin-mocha"] {
+  --color-rosewater: #f5e0dc;
+  --color-flamingo: #f2cdcd;
+  --color-pink: #f5c2e7;
+  --color-mauve: #cba6f7;
+  --color-red: #f38ba8;
+  --color-maroon: #eba0ac;
+  --color-peach: #fab387;
+  --color-yellow: #f9e2af;
+  --color-green: #a6e3a1;
+  --color-teal: #94e2d5;
+  --color-sky: #89dceb;
+  --color-sapphire: #74c7ec;
+  --color-blue: #89b4fa;
+  --color-lavender: #b4befe;
+  --color-text: #cdd6f4;
+  --color-subtext-1: #bac2de;
+  --color-subtext-0: #a6adc8;
+  --color-overlay-2: #9399b2;
+  --color-overlay-1: #7f849c;
+  --color-overlay-0: #6c7086;
+  --color-surface-2: #585b70;
+  --color-surface-1: #45475a;
+  --color-surface-0: #313244;
+  --color-base: #1e1e2e;
+  --color-mantle: #181825;
+  --color-crust: #11111b;
+}
+
+[data-theme="catpuccin-macchiato"] {
+  --color-rosewater: #f4dbd6;
+  --color-flamingo: #f0c6c6;
+  --color-pink: #f5bde6;
+  --color-mauve: #c6a0f6;
+  --color-red: #ed8796;
+  --color-maroon: #ee99a0;
+  --color-peach: #f5a97f;
+  --color-yellow: #eed49f;
+  --color-green: #a6da95;
+  --color-teal: #8bd5ca;
+  --color-sky: #91d7e3;
+  --color-sapphire: #7dc4e4;
+  --color-blue: #8aadf4;
+  --color-lavender: #b7bdf8;
+  --color-text: #cad3f5;
+  --color-subtext-1: #b8c0e0;
+  --color-subtext-0: #a5adcb;
+  --color-overlay-2: #939ab7;
+  --color-overlay-1: #8087a2;
+  --color-overlay-0: #6e738d;
+  --color-surface-2: #5b6078;
+  --color-surface-1: #494d64;
+  --color-surface-0: #363a4f;
+  --color-base: #24273a;
+  --color-mantle: #1e2030;
+  --color-crust: #181926;
+}
