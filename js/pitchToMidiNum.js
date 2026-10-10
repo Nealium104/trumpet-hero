@@ -1,6 +1,12 @@
 import pitchClasses from "../data/pitchClasses.json" with { type: "json" }
 import accidentals from "../data/accidentals.json" with { type: "json" }
 
+/**
+  * Converts a pitch written in scientific notation to a number corresponding
+  * to MIDI notation.
+  * @func
+  * @param {string} pitch - The pitch in scientific notation
+*/
 export function convertPitch(pitch) {
   const pitchClass = pitch[0];
   pitch = pitch.replace(pitchClass, "");
