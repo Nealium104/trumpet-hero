@@ -22,3 +22,17 @@ export function evaluateCombination(midi, combination) {
   if (noteCombinations.includes(combination)) return possibleResults.Alternate
   return possibleResults.Failure
 }
+
+/** Returns a single bitmask for a given combination in array form
+  * @func
+  * @param {boolean[]} - The array of booleans representing a combination
+  * @returns {number} - The same array in a bitmask form (e.g., 0b101 as values 1 and 3 pressed)
+*/
+export function combinationToBitmask(combination) {
+  // [boolean, boolean, boolean]
+  let collect = "0b";
+  for (const valve of combination) {
+    collect += +valve;
+  }
+  return +collect;
+}

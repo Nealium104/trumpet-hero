@@ -1,5 +1,6 @@
 import { Circle } from "./circle.js";
 import { Trumpet } from "./trumpet.js";
+import { scientificNotationToMIDI } from "./pitchToMidiNum.js";
 
 let canvas = document.getElementById("canvas");
 const ctx = canvas.getContext("2d");
@@ -11,11 +12,13 @@ canvas.style.border = "solid 5pt green"
 ctx.lineWidth = 5;
 
 let xLocation = canvas.width - 150;
+let yStart = canvas.height;
+let valveWidth = 100;
 
-let v1 = new Circle(ctx, xLocation, 1000, 100);
-let v2 = new Circle(ctx, xLocation, 700, 100, "purple");
-let v3 = new Circle(ctx, xLocation, 400, 100, "red");
-let valves = [v1, v2, v3]
+let v1 = new Circle(ctx, xLocation, yStart, valveWidth);
+let v2 = new Circle(ctx, xLocation, yStart + 150, valveWidth);
+let v3 = new Circle(ctx, xLocation, yStart + 250, valveWidth);
+let valves = [v1, v2, v3];
 
 const trumpet = new Trumpet();
 
@@ -25,6 +28,7 @@ async function getAllNotes() {
     const response = await fetch(request);
 
     const notes = await response.json();
+    console.log(`Exercise retreival successful, notes: ${notes}`)
     return notes;
 }
 
@@ -47,13 +51,6 @@ canvas.addEventListener("touchend", (e) => {
             // translate from array index to trumpet index
             const valveIndex = i + 1;
         });
-        // for (const valve of valves) {
-        //     const valveIndex =
-        //     if (touch.identifier === valve.pressId) {
-        //         valve.unpress();
-        //     }
-        // }
-    // }
     });
 });
 
@@ -65,12 +62,15 @@ function getDistance(x1, y1, x2, y2) {
     return Math.sqrt(a + b);
 }
 
-let allNotes = getAllNotes();
+// TODO: Replace with a fetch triggered by UI
+let exercise = scientificNotationToMIDI(getAllNotes()); // exercise as an array of ints
+
+let currentExerciseCombination = exercise[0];
+let currentValveCombination = trumpet.getCurrentCombination();
 
 function draw() {
     ctx.clearRect(0, 0, canvas.width, canvas.height);
 
-    let expectedValveCombo = [];
 
     valves.forEach((valve, i) => {
         // Map valve array index to trumpet index

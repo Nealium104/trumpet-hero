@@ -1,8 +1,8 @@
+import { combinationToBitmask } from "./evaluateCombination";
+
 export class Trumpet {
     constructor() {
-        // keep the first value null to treat the indexes like valve combos
-        // e.g., 1-3 for D, 1-2 for E
-        this.valves = [null, false, false, false];
+        this.currentCombinationArray = [null, false, false, false];
     }
 
     #validateIndex(index) {
@@ -21,12 +21,14 @@ export class Trumpet {
         if (index > 0) this.valves[index] = false;
     }
 
-    getCurrentCombo() {
-        let combo = [];
-        this.valves.forEach((isPressed, index) => {
-            isPressed && combo.push(index + 1);
-        });
+    // returns bitmask
+    getCurrentCombination() {
+      return combinationToBitmask(this.currentCombinationArray.slice(1));
+    }
 
-        return combo.length > 0 ? combo.join("-") : "open";
+    // translate and store valve combination to a bitmask
+    setCurrentCombination(combinationArray) {
+      this.currentCombinationArray = [null, ...combinationToBitmask(combinationArray)];
+      return this.currentCombinationArray; // bitmask value
     }
 }

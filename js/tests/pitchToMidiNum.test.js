@@ -25,3 +25,4 @@ test("note with octave and accidental", () => {
     assert.equal(actual, expected, `notated pitch: ${setPitch}`);
   }
 });
+
