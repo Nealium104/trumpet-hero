@@ -2,7 +2,7 @@
   "private": true,
   "type": "module",
   "scripts": {
-    "dev": "http-server -p -c-1",
+    "dev": "http-server -p 8080 -c-1",
     "test": "node --test",
     "test:watch": "node --test --watch"
   },
