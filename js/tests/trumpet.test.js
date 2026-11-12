@@ -2,25 +2,13 @@ import test from "node:test";
 import assert from "node:assert/strict";
 
 import { Trumpet } from "../trumpet.js";
+import { combinationToBitmask } from "../combination.js";
 
 test("test start bitmask", () => {
-  const sets = [
-    // combination, bitmask
-    [
-      [null, true, false, false],
-      0b100
-    ]
-  ];
-
-  for (const set of sets) {
-    const [combination, bitmask] = set;
-    const trumpet = new Trumpet({
-      currentCombinationbitmask: bitmask,
-    });
-    const expected = bitmask;
-    const actual = trumpet.getCurrentCombinationBitmask();
-    assert.equal(actual, expected);
-  }
+  const trumpet = new Trumpet();
+  const expected = 0b000;
+  const actual = trumpet.getCombinationBitmask();
+  assert.equal(actual, expected);
 });
 
 test("test set new combination from array", () => {
@@ -51,7 +39,7 @@ test("test set new combination from array", () => {
 
   for (const set of sets) {
     const [valveCombination, expected] = set;
-    const actual = trumpet.setCurrentCombination(valveCombination);
+    const actual = trumpet.setCombinationBitmask(combinationToBitmask(valveCombination));
     assert.equal(actual, expected);
   }
 });
@@ -70,8 +58,7 @@ test("test valve presses", () => {
   for (const set of sets) {
     const [valve, expected] = set;
     trumpet.pressValve(valve);
-    const actual = trumpet.getCurrentCombinationBitmask();
-    console.log(actual);
+    const actual = trumpet.getCombinationBitmask();
     assert.equal(
       actual,
       expected,

@@ -1,42 +1,35 @@
-import { combinationToBitmask } from "./evaluateCombination.js";
+import { combinationToBitmask, withValvePressed, withValveReleased } from "./combination.js";
 
 export class Trumpet {
-    constructor({
-      currentCombinationbitmask = 0b000
-    }) {
-        this.currentCombinationBitmask = currentCombinationbitmask;
-        this.valveCombination = this.;
+    constructor(combinationBitmask = 0b000) {
+        this.combinationBitmask = combinationBitmask;
     }
 
-    #validateIndex(index) {
-        if (index < 1 || index > 3) {
-            throw new Error(`Attempted to access invalid valve index '${index}'. Allowed: 1, 2, 3.`);
-        }
+    pressValve(valve) {
+      const currentCombination = this.getCombinationBitmask();
+      const newCombination = withValvePressed(currentCombination, valve);
+      console.log(newCombination);
+      this.setCombinationBitmask(newCombination);
     }
-
-    pressValve(index) {
-        this.#validateIndex(index);
-        this.valveCombination[index] = true;
-    }
-
-    releaseValve(index) {
-        this.#validateIndex(index);
-        if (index > 0) this.valveCombination[index] = false;
-    }
-
+    //
+    // releaseValve(valve) {
+    //     if (valve > 0) this.valveCombination[valve] = false;
+    // }
+    //
     // returns bitmask
-    getCurrentCombinationBitmask() {
-      return combinationToBitmask(this.valveCombination.slice(1));
-    }
-
-    getCurrentValveCombination() {
-      return BitmaskToCombination();
+    getCombinationBitmask() {
+      return this.combinationBitmask;
     }
 
     // translate and store valve combination to a bitmask
-    setCurrentCombination(combination) {
-      this.valveCombination = [null, ...(combination)];
-      this.currentCombinationBitmask = combinationToBitmask(this.valveCombination.slice(1));
-      return this.currentCombinationBitmask; // bitmask value
+    setCombinationBitmask(combinationBitmask) {
+      this.combinationBitmask = combinationBitmask;
+      return this.combinationBitmask;
     }
+
+    getValveCombination() {
+      // TODO
+      return null;
+    }
+
 }
