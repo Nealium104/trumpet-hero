@@ -1,5 +1,11 @@
 import combinations from "../data/combinations.js"
 
+function validateIndex(index) {
+    if (index < 1 || index > 3) {
+        throw new Error(`Attempted to access invalid valve index '${index}'. Allowed: 1, 2, 3.`);
+    }
+}
+
 /**
   * Returns the correctness of a valve combination matching a MIDI note as either
   * 'success' for the canonical valve combination (e.g., G4 is open),
@@ -43,5 +49,41 @@ export function combinationToBitmask(combination) {
   * @returns {boolean[]} - The same bitmask in array form (e.g., [null, false, false, true])
 */
 export function bitmaskToCombination(bitmask) {
-  
+  const bitLength = 3;
+  const activeIndexes = [null];
+
+  for (let i = bitLength - 1; i >= 0; i--) {
+    if ((bitmask & (1 << i)) !== 0) {
+      activeIndexes.push(true);
+    } else {
+      activeIndexes.push(false);
+    }
+  }
+  return activeIndexes;
+}
+
+export function convertValveToBit(valve){
+  // [1, 0b100 = 4],
+  // [2, 0b010 = 2],
+  // [3, 0b001 = 1]
+
+  let result = (valve >> 2) & 2;
+  return result.toString(2).padStart(3, "0");
+  // return result
+}
+
+export function convertBitToValve(bit) {
+  return ((bit & 1) << 2) | (bit & 2) | ((bit & 4) >> 2);
+}
+
+export function withValvePressed(initialBitmask, valvePressed) {
+  const bit = convertBitToValve(valvePressed);
+  console.log(`valvePressed: ${valvePressed}`)
+  console.log(`valve converted to bit: ${bit.toString(2).padStart(3)}`)
+  return initialBitmask | bit;
+}
+
+export function withValveReleased(initialBitmask, valveReleased) {
+  const bit = convertBitToValve(~(1 << valveReleased));
+  return initialBitmask & bit;
 }
